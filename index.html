@@ -271,7 +271,115 @@
                 </div>
             </div>
         </section>
+
+        <section id="newsletter" class="newsletter-section">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Newsletter do CACA</h2>
+                    <p class="section-subtitle">Subscreva para receber as últimas notícias e eventos sobre saúde.</p>
+                </header>
+                <form id="newsletter-form" class="newsletter-form">
+                    <div class="form-group">
+                        <input type="text" id="news-name" placeholder="O seu nome" required>
+                        <input type="email" id="news-email" placeholder="O seu e-mail" required>
+                        <button type="submit" class="btn cta-button">Subscrever</button>
+                    </div>
+                    <div id="newsletter-feedback" class="feedback-msg"></div>
+                </form>
+            </div>
+        </section>
+
+        <section id="eventos" class="events-management">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">Gestão de Eventos</h2>
+                    <p class="section-subtitle">Adicione e gira os eventos académicos e clínicos do CACA.</p>
+                </header>
+
+                <div class="event-form-container">
+                    <h3 class="contact-form-title">Registar Novo Evento</h3>
+                    <form id="event-form" class="contact-form">
+                        <input type="hidden" id="event-id">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <span class="input-icon" title="Título"><i class="fi fi-rr-text"></i></span>
+                                    <input type="text" id="event-title" placeholder="Título do Evento *" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <span class="input-icon" title="Data"><i class="fi fi-rr-calendar"></i></span>
+                                    <input type="date" id="event-date" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <span class="input-icon" title="Hora"><i class="fi fi-rr-clock"></i></span>
+                                    <input type="time" id="event-time" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <span class="input-icon" title="Localização"><i class="fi fi-rr-marker"></i></span>
+                                    <select id="event-location" name="event-location" required>
+                                        <option value="" disabled selected>Selecione a Ilha/Local *</option>
+                                        <optgroup label="Grupo Ocidental">
+                                            <option value="Flores,PT">Ilha das Flores</option>
+                                            <option value="Corvo,PT">Ilha do Corvo</option>
+                                        </optgroup>
+                                        <optgroup label="Grupo Central">
+                                            <option value="Faial,PT">Ilha do Faial</option>
+                                            <option value="Pico,PT">Ilha do Pico</option>
+                                            <option value="Sao Jorge,PT">Ilha de São Jorge</option>
+                                            <option value="Terceira,PT">Ilha Terceira</option>
+                                            <option value="Graciosa,PT">Ilha da Graciosa</option>
+                                        </optgroup>
+                                        <optgroup label="Grupo Oriental">
+                                            <option value="Ponta Delgada,PT">Ilha de São Miguel</option>
+                                            <option value="Santa Maria,PT">Ilha de Santa Maria</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <span class="input-icon align-top" title="Descrição"><i class="fi fi-rr-align-left"></i></span>
+                                <textarea id="event-description" rows="3" placeholder="Descrição detalhada do evento..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions" style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                            <button type="button" id="check-weather" class="btn" style="background-color: var(--color-primary); color: white;">
+                                <i class="fi fi-rr-cloud-sun"></i> Ver Clima
+                            </button>
+                            <button type="submit" id="btn-save-event" class="btn submit-button">Guardar Evento</button>
+                        </div>
+                    </form>
+                    
+                    <div id="weather-display" class="weather-info-box" style="display: none;">
+                        </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--color-light-gray); margin: var(--spacing-xl) 0;">
+
+                <div class="events-list-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md); flex-wrap: wrap; gap: 1rem;">
+                    <h3 class="contact-form-title" style="margin-bottom: 0;">Próximos Eventos</h3>
+                </div>
+
+                <div id="events-list" class="research-grid">
+                    </div>
+            </div>
+        </section>
     </main>
+
+    
 
     <footer class="footer">
         <div class="container footer-content">

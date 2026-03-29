@@ -5,7 +5,8 @@ import { ValidacaoFormulario } from './formulario.js';
 import { initMenuNav } from './menu-nav.js';
 import { initSaberMais } from './saber-mais.js';
 import { initScrollToTop } from './scroll-to-top.js';
-
+import { EventsIndexedDBCRUD } from './eventsindexeddbcrud.js';
+import { GestaoDeEventos } from './eventos.js';
 /**
  * Conjunto de dados base para o gráfico de oportunidades.
  * @type {Array<Object>}
@@ -23,13 +24,18 @@ const dadosOportunidades = [
  * Event Listener principal. Inicializa todos os módulos e scripts
  * assim que o DOM estiver completamente carregado.
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     
     initAnimacao3D();
     initCarrossel();
     initMenuNav();
     initSaberMais();
     initScrollToTop();
+
+    const db = new EventsIndexedDBCRUD();
+    await db.init();
+    
+    const gestor = new GestaoDeEventos(db);
 
     const meuGrafico = new GraficoOportunidades(dadosOportunidades);
     meuGrafico.analisarDados(); 
@@ -40,5 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => {
         meuGrafico.mostrarGrafico(); 
+    });
+
+    window.addEventListener('deleteEvent', async (e) => {
+        if(confirm("Deseja remover este evento?")) {
+            await db.delete(e.detail);
+            gestor.renderEvents();
+        }
     });
 });

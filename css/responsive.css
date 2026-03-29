@@ -28,6 +28,8 @@
     .contact-info, .contact-form-wrapper { padding: 1.5rem; }
     .footer-content { flex-direction: column; text-align: center; }
     .footer-links { flex-direction: column; align-items: center; }
+    .newsletter-form .form-group { flex-direction: column; }
+    .newsletter-form .cta-button { width: 100%; }
 }
 
 @media (max-width: 480px) {
