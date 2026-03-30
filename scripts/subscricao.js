@@ -7,13 +7,24 @@ export class Inscricoes {
     async init() {
         const form = document.getElementById('newsletter-form');
         
-        // 1. Garante que o form existe antes de adicionar o listener
+        // Garante que o form existe antes de adicionar o listener
         if (form) {
             form.addEventListener('submit', (e) => this.handleRegistration(e));
         }
 
-        // 2. Carrega a lista de participantes assim que a classe é instanciada
+        // Carrega a lista de participantes assim que a classe é instanciada
         await this.renderParticipantes();
+    }
+
+    validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    validarNome(nome) {
+        // Aceita letras (incluindo acentos) e espaços. Mínimo 3 caracteres.
+        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/;
+        return regex.test(nome.trim());
     }
 
     async handleRegistration(e) {
@@ -29,20 +40,32 @@ export class Inscricoes {
                 return;
             }
 
+            if (!this.validarNome(nome)) {
+                alert("Por favor, insira um nome válido (mínimo 3 caracteres, apenas letras).");
+                nomeInput.focus();
+                return;
+            }
+
+            if (!this.validarEmail(email)) {
+                alert("Por favor, insira um endereço de e-mail válido.");
+                emailInput.focus();
+                return;
+            }
+
             const inscricao = {
                 nome: nomeInput.value,
                 email: emailInput.value,
                 dataInscricao: new Date().toISOString()
             };
 
-            // 3. Aguarda a gravação na IndexedDB
+            // Aguarda a gravação na IndexedDB
             await this.db.create(inscricao);
             
             alert(`Obrigado, ${inscricao.nome}! Inscrição confirmada.`);
             
             e.target.reset();
             
-            // 4. Atualiza a lista visualmente
+            // Atualiza a lista visualmente
             await this.renderParticipantes(); 
 
         } catch (error) {

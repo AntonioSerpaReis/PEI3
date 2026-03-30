@@ -9,6 +9,7 @@ import { EventsIndexedDB } from './eventsindexeddb.js';
 import { GestaoDeEventos } from './eventos.js';
 import { InscricaoIndexedDB } from './subscricaoindexeddb.js';
 import { Inscricoes } from './subscricao.js';
+import { FeedNoticias } from './noticias.js';
 /**
  * Conjunto de dados base para o gráfico de oportunidades.
  * @type {Array<Object>}
@@ -33,6 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     initMenuNav();
     initSaberMais();
     initScrollToTop();
+
+    const feed = new FeedNoticias();
+    feed.render();
     
     const meuGrafico = new GraficoOportunidades(dadosOportunidades);
     meuGrafico.analisarDados(); 
