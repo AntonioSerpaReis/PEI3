@@ -1,4 +1,4 @@
-export class EventsIndexedDBCRUD {
+export class EventsIndexedDB {
     constructor(dbName = "CACA_DB", storeName = "eventos") {
         this.dbName = dbName;
         this.storeName = storeName;
@@ -32,7 +32,6 @@ export class EventsIndexedDBCRUD {
     const tx = this.db.transaction([this.storeName], "readwrite");
     const store = tx.objectStore(this.storeName);
     return new Promise((resolve, reject) => {
-        // O .put() atualiza se o ID existir ou cria se não existir
         const req = store.put(data); 
         req.onsuccess = () => resolve(req.result);
         req.onerror = () => reject(req.error);

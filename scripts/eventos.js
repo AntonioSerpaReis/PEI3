@@ -3,7 +3,6 @@ export class GestaoDeEventos {
         this.db = db;
         this.apiKey = "ff2ceadd73356260e5f8b9e1093ccc9b";
 
-        // Expor funções globais para os botões do HTML
         window.deleteEvent = async (id) => {
             if (confirm("Eliminar este evento?")) {
                 await this.db.delete(id);
@@ -31,18 +30,15 @@ export class GestaoDeEventos {
     }
 
     fillFormForEdit(event) {
-        // Preenche os campos do formulário
-        document.getElementById('event-id').value = event.id; // Campo hidden que já existe no seu HTML
+        document.getElementById('event-id').value = event.id; 
         document.getElementById('event-title').value = event.title;
         document.getElementById('event-date').value = event.date;
         document.getElementById('event-time').value = event.time;
         document.getElementById('event-location').value = event.location;
         document.getElementById('event-description').value = event.description;
         
-        // Altera o texto do botão para feedback visual
         document.getElementById('btn-save-event').innerText = "Atualizar Evento";
         
-        // Scroll até ao formulário
         document.getElementById('event-form').scrollIntoView({ behavior: 'smooth' });
     }
 

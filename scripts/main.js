@@ -5,8 +5,10 @@ import { ValidacaoFormulario } from './formulario.js';
 import { initMenuNav } from './menu-nav.js';
 import { initSaberMais } from './saber-mais.js';
 import { initScrollToTop } from './scroll-to-top.js';
-import { EventsIndexedDBCRUD } from './eventsindexeddbcrud.js';
+import { EventsIndexedDB } from './eventsindexeddb.js';
 import { GestaoDeEventos } from './eventos.js';
+import { InscricaoIndexedDB } from './subscricaoindexeddb.js';
+import { Inscricoes } from './subscricao.js';
 /**
  * Conjunto de dados base para o gráfico de oportunidades.
  * @type {Array<Object>}
@@ -31,12 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initMenuNav();
     initSaberMais();
     initScrollToTop();
-
-    const db = new EventsIndexedDBCRUD();
-    await db.init();
     
-    const gestor = new GestaoDeEventos(db);
-
     const meuGrafico = new GraficoOportunidades(dadosOportunidades);
     meuGrafico.analisarDados(); 
     meuGrafico.mostrarGrafico();
@@ -48,6 +45,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         meuGrafico.mostrarGrafico(); 
     });
 
+    const dbInscricoes = new InscricaoIndexedDB();
+    await dbInscricoes.init();
+    new Inscricoes(dbInscricoes);
+
+    const db = new EventsIndexedDB();
+    await db.init();
+    const gestor = new GestaoDeEventos(db);
+
+    
     window.addEventListener('deleteEvent', async (e) => {
         if(confirm("Deseja remover este evento?")) {
             await db.delete(e.detail);
