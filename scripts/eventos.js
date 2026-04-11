@@ -16,6 +16,8 @@ export class GestaoDeEventos {
     constructor(db) {
         this.db = db;
         this.apiKeyOpenWeather = "ff2ceadd73356260e5f8b9e1093ccc9b";
+        this.map = null;
+        this.markers = [];
 
         window.deleteEvent = async (id) => {
             if (confirm("Eliminar este evento?")) {
@@ -28,19 +30,6 @@ export class GestaoDeEventos {
             const events = await this.db.getAll();
             const eventToEdit = events.find(ev => ev.id === id);
             if (eventToEdit) this.fillFormForEdit(eventToEdit);
-        };
-
-        this.map = null;
-        this.markers = [];
-
-        window.initMap = () => {
-            this.map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 7,
-                center: { lat: 38.5, lng: -28.0 }, // Centraliza no arquipélago
-                streetViewControl: false,
-                mapTypeControl: false
-            });
-            this.updateMarkers();
         };
 
         this.initLeaflet();
@@ -96,7 +85,7 @@ export class GestaoDeEventos {
         const targetDateTime = new Date(`${dateStr}T${timeStr}`).getTime();
         
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}&units=metric&lang=pt`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKeyOpenWeather}&units=metric&lang=pt`);
             const data = await response.json();
 
             if (data.cod !== "200") throw new Error();
