@@ -1,6 +1,6 @@
 /**
  * Inicializador central da base de dados IndexedDB.
- * Retorna uma promise com a instância da base de dados.
+ * Retorna uma promise com a instância da base de dados
  */
 export async function initDB() {
     return new Promise((resolve, reject) => {
