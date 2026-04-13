@@ -1,6 +1,8 @@
-export class FeedNoticias {
+import { escapeHTML } from '../utils/security.js';
+
+export class NewsService {
     constructor() {
-        this.apiKey = 'dc8ad4bc280b4eb885f483876909e95a';
+        this.apiKey = import.meta.env.VITE_NEWS_API_KEY;
         this.container = document.getElementById('news-container');
         this.baseUrl = 'https://newsapi.org/v2/everything';
     }
@@ -34,21 +36,21 @@ export class FeedNoticias {
         articles.forEach(article => {
             const card = document.createElement('article');
             // Reutilizando as classes do teu CSS atual para consistência visual
-            card.className = 'research-card card-blue'; 
+            card.className = 'research-card card-blue';
             card.style.display = 'flex';
             card.style.flexDirection = 'column';
 
             card.innerHTML = `
                 <div class="card-header">
-                    <h3 class="card-title" style="font-size: 1.1rem; line-height: 1.3;">
-                        ${article.title}
+                    <h3 class="card-title news-card-title">
+                        ${escapeHTML(article.title)}
                     </h3>
                 </div>
                 <p class="card-description" style="flex-grow: 1;">
-                    ${article.description || 'Clique para ler os detalhes desta atualização de saúde.'}
+                    ${escapeHTML(article.description) || 'Clique para ler os detalhes desta atualização de saúde.'}
                 </p>
                 <div style="margin-top: 15px;">
-                    <a href="${article.url}" target="_blank" rel="noopener" class="btn" style="font-size: 0.8rem; padding: 8px 15px;">
+                    <a href="${escapeHTML(article.url)}" target="_blank" rel="noopener" class="btn news-card-btn">
                         Ler Artigo Completo
                     </a>
                 </div>
