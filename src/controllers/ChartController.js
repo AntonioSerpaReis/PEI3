@@ -1,7 +1,9 @@
+import * as d3 from 'd3';
+
 /**
  * Classe responsável por desenhar e animar o gráfico de barras de oportunidades utilizando D3.js.
  */
-export class GraficoOportunidades {
+export class ChartController {
     /**
      * @param {Array<Object>} dados - Lista de objetos com "ano" e "valor" das oportunidades.
      */
@@ -22,7 +24,7 @@ export class GraficoOportunidades {
         const anosAltaProcura = this.dados.filter(d => d.valor > 50).map(d => d.ano);
         const total = this.dados.reduce((acc, atual) => acc + atual.valor, 0);
         const statsContainer = document.getElementById('estatisticas-grafico');
-        
+
         if (statsContainer) {
             statsContainer.innerHTML = `
                 <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
@@ -40,7 +42,7 @@ export class GraficoOportunidades {
         //Seleciona a área do gráfico e limpa
         const container = document.querySelector('.grafico-placeholder');
         const grafico = d3.select('#opportunityChart');
-        
+
         const grupoEixoX = grafico.select('.eixo-x');
         const grupoCorpo = grafico.select('.corpo-grafico');
 
@@ -50,7 +52,7 @@ export class GraficoOportunidades {
         //Calcula a largura e altura corretas
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight || 300;
-        
+
         const innerWidth = containerWidth - this.config.margin.left - this.config.margin.right;
         const innerHeight = containerHeight - this.config.margin.top - this.config.margin.bottom;
 
@@ -76,22 +78,22 @@ export class GraficoOportunidades {
             .data(this.dados)
             .enter()
             .append("rect")
-            
+
             // A) Posição horizontal e cor da barra
             .attr("x", d => xScale(d.ano))
             .attr("width", xScale.bandwidth())
-            .attr("fill", this.config.corBarra) 
+            .attr("fill", this.config.corBarra)
             .attr("rx", 4) // Bordas arredondadas
-            
+
             // B) Posição inicial antes da animação
-            .attr("y", innerHeight) 
+            .attr("y", innerHeight)
             .attr("height", 0)
-            
+
             // C) Iniciar animação de escada
             .transition()
             .duration(this.config.duracaoAnimacao)
             .delay((d, i) => i * 80)
-            
+
             // D) Posição final após a animação
             .attr("y", d => yScale(d.valor))
             .attr("height", d => innerHeight - yScale(d.valor));

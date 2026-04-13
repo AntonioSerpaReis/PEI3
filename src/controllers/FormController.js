@@ -1,7 +1,7 @@
 /**
  * Classe responsável pela gestão, validação e submissão do formulário de contacto.
  */
-export class ValidacaoFormulario {
+export class FormController {
     /**
      * Inicializa as configurações e seleciona os elementos do DOM.
      */
@@ -10,13 +10,12 @@ export class ValidacaoFormulario {
         this.campos = Array.from(document.querySelectorAll('.form-group input, .form-group textarea, #subject'));
         this.subjectEl = document.getElementById('subject');
         this.messageEl = document.getElementById('message');
-        
+
         this.config = {
             corValido: "4px solid #4CAF50",
             corInvalido: "4px solid #ff4d4d"
         };
 
-        // Mensagens pré-definidas para cada assunto do dropdown
         this.mensagensPreDefinidas = {
             "Informações Gerais": "Gostaria de obter mais informações gerais sobre o Centro Académico Clínico dos Açores.",
             "Estágios e Oportunidades": "Tenho interesse nas oportunidades de estágio. Poderiam enviar-me os requisitos?",
@@ -25,10 +24,10 @@ export class ValidacaoFormulario {
         };
     }
 
-     /**
-     * Inicia os event listeners do formulário, incluindo a validação em tempo real e a mudança de assunto.
-     * @returns {void}
-     */
+    /**
+    * Inicia os event listeners do formulário, incluindo a validação em tempo real e a mudança de assunto.
+    * @returns {void}
+    */
     iniciar() {
         if (!this.form) return;
 
@@ -36,11 +35,9 @@ export class ValidacaoFormulario {
             campo.addEventListener('input', () => this.atualizarEstiloVisual(campo));
         });
 
-        // Event listener para alterar a mensagem automaticamente consoante o assunto
         if (this.subjectEl && this.messageEl) {
             this.subjectEl.addEventListener('change', (e) => {
                 const assuntoSelecionado = e.target.value;
-                // Só substitui se a caixa estiver vazia ou já tiver uma das mensagens padrão
                 const mensagemAtual = this.messageEl.value.trim();
                 if (mensagemAtual === "" || Object.values(this.mensagensPreDefinidas).includes(mensagemAtual)) {
                     this.messageEl.value = this.mensagensPreDefinidas[assuntoSelecionado] || "";
@@ -59,7 +56,7 @@ export class ValidacaoFormulario {
      */
     validarCampo(elemento) {
         const valor = elemento.value.trim();
-        
+
         if (valor === "") return false;
 
         if (elemento.id === 'name') {
@@ -95,17 +92,17 @@ export class ValidacaoFormulario {
             elemento.style.borderRight = "none";
             return;
         }
-        
-        elemento.style.borderRight = this.validarCampo(elemento) 
-            ? this.config.corValido 
+
+        elemento.style.borderRight = this.validarCampo(elemento)
+            ? this.config.corValido
             : this.config.corInvalido;
     }
 
-     /**
-     * Lida com o evento de submissão do formulário, validando todos os campos antes de enviar.
-     * @param {Event} e - O evento de submissão do formulário.
-     * @returns {void}
-     */
+    /**
+    * Lida com o evento de submissão do formulário, validando todos os campos antes de enviar.
+    * @param {Event} e - O evento de submissão do formulário.
+    * @returns {void}
+    */
     validarSubmissao(e) {
         e.preventDefault();
 
@@ -137,7 +134,7 @@ export class ValidacaoFormulario {
 
         if (confirm(`Deseja enviar a mensagem?`)) {
             alert('Mensagem enviada com sucesso!');
-            this.form.reset(); 
+            this.form.reset();
             this.campos.forEach(campo => campo.style.borderRight = "none");
         }
     }
