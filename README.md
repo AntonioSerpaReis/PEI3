@@ -45,8 +45,8 @@ Para tornar a landing page dinâmica e rica em dados, integramos 3 serviços ext
 ### Segurança e Decisões de Arquitetura
 Como parte do aprofundamento das competências em desenvolvimento web, foram aplicadas camadas de proteção cruciais de segurança front-end:
 * **Proteção XSS (`escapeHTML`):** Para proteger o sistema de injeções maliciosas via inputs nos formulários ou dados providenciados por APIs de terceiros, toda a informação exportada para o DOM recorre à função sanitizadora implementada em `src/utils/security.js`.
-* **Content-Security-Policy (CSP):** Incluímos uma metatag em `index.html` limitando a leitura e a submissão a determinados domínios oficiais estipulados, o que nega ativamente ataques man-in-the-middle e remote execution.
 * **Obfuscação de API Keys:** Adotamos o bundler Node.js **Vite** para construir a aplicação localmente de modo a assegurar que as chaves de API secretas residem exclusivamente no ficheiro de ambiente estrito (`.env`) e providenciadas ao cliente mascaradas pela engine (em `import.meta.env.*`).
+
 * **Arquitetura de Software Profissional:** 
     *   **Controllers (`src/controllers/`):** Gerem a orquestração entre a UI e a lógica de negócio.
     *   **Repositories (`src/db/`):** Camada de abstração para acesso à IndexedDB, isolando as queries da lógica da aplicação.
@@ -74,13 +74,14 @@ A identidade visual do **CACA** foi concebida para transmitir profissionalismo a
 👉 **[Aceder ao Mockup no Figma](https://www.figma.com/design/PuXRORH6CwtRzvyE24N7gx/CACA-design?m=auto&t=uTQoVrV0gr24hink-6)**
 
 ### Paleta de Cores
-* **Azul primário (#1976D2 / #003882):** Representa confiança, saúde e o oceano Atlântico que rodeia as ilhas.
-* **Verde secundário (#43A047 / #FFD100):** Simboliza a area da saúde.
+* **Azul primário (#1E56D0 / #061D60):** Representa confiança, saúde e o oceano Atlântico que rodeia as ilhas.
+* **Verde secundário (#2ECC71 / #58D68D):** Simboliza a área da saúde.
 * **Cores de destaque (laranja, roxo, vermelho):** Utilizadas para diferenciar áreas de investigação.
 
+
 ### Tipografia
-* **Display:** Playfair Display (usada em títulos institucionais).
-* **Corpo:** Source Sans 3 (otimizada para leitura de conteúdo).
+* **Principal:** Inter (Uma fonte sans-serif moderna, altamente legível e otimizada para interfaces digitais, utilizada em todo o projeto).
+
 
 ### Acessibilidade e Responsividade (WCAG)
 * **Contraste de cores:** Testado para garantir ratio mínimo 4.5:1 (texto normal) e 3:1 (texto grande).
