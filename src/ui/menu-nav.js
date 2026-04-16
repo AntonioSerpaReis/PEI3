@@ -1,7 +1,5 @@
 /**
- * Inicializa os controlos do menu de navegação responsivo (versão mobile).
- * Associa o evento de clique ao botão "hambúrguer" para abrir ou fechar o menu.
- * @returns {void}
+ * Navegação responsiva (mobile).
  */
 export function initMenuNav() {
     const menuToggle = document.getElementById('menuToggle');
@@ -9,7 +7,17 @@ export function initMenuNav() {
 
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
+            mainNav.classList.toggle('header__nav--open');
+            menuToggle.classList.toggle('header__hamburger--active');
+        });
+        
+        // Ensure menu closes when clicking a link
+        const navLinks = mainNav.querySelectorAll('.header__nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('header__nav--open');
+                menuToggle.classList.remove('header__hamburger--active');
+            });
         });
     }
 }

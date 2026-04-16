@@ -1,3 +1,5 @@
+![CACA - Centro Académico Clínico dos Açores](./assets/image.png)
+
 # Landing Page - Centro Académico Clínico dos Açores (CACA)
 
 ## Identificação do Grupo
@@ -62,6 +64,8 @@ Como a aplicação implementa proteção local com variáveis de ambiente (fiche
 
 ## Identidade Visual e Layout (Entrega 1)
 A identidade visual do **CACA** foi concebida para transmitir profissionalismo académico e confiança na área da saúde, integrando elementos regionais dos Açores.
+
+👉 **[Aceder ao Mockup no Figma](https://www.figma.com/design/PuXRORH6CwtRzvyE24N7gx/CACA-design?m=auto&t=uTQoVrV0gr24hink-6)**
 
 ### Paleta de Cores
 * **Azul primário (#1976D2 / #003882):** Representa confiança, saúde e o oceano Atlântico que rodeia as ilhas.

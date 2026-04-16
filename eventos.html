@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn-uicons.flaticon.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn-uicons.flaticon.com; img-src 'self' data: https: http:; connect-src 'self' https://api.openweathermap.org https://newsapi.org;">
+        content="Gestão de Eventos - Centro Académico Clínico dos Açores">
+    <meta name="keywords" content="CACA, eventos, saúde, Açores, investigação clínica">
+    <title>Eventos | CACA - Centro Académico Clínico dos Açores</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+</head>
+
+<body>
+    <header class="header" id="header" role="banner">
+        <div class="header__container">
+            <a href="./index.html" class="header__logo" aria-label="Página inicial do CACA">
+                <div class="logo">
+                    <div id="logo-3d-container" class="logo-3d-container"></div>
+                </div>
+            </a>
+
+            <nav class="header__nav" id="mainNav" role="navigation" aria-label="Navegação principal">
+                <a href="./index.html#missao" class="header__nav-link">Missão</a>
+                <a href="./index.html#parceiros" class="header__nav-link">Parceiros</a>
+                <a href="./index.html#oportunidades" class="header__nav-link">Oportunidades</a>
+                <a href="./index.html#contactos" class="header__nav-link">Contactos</a>
+                <a href="./eventos.html" class="header__nav-link header__nav-link--active">Eventos</a>
+            </nav>
+
+            <button type="button" class="header__hamburger" id="menuToggle" aria-label="Abrir menu de navegação"
+                aria-expanded="false" aria-controls="mainNav">
+                <span class="header__hamburger-line"></span>
+                <span class="header__hamburger-line"></span>
+                <span class="header__hamburger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 140px;">
+            <div class="container">
+                <h1 class="section__title">Gestão de Eventos</h1>
+                <p class="section__description">Adicione e gira os eventos académicos e clínicos do CACA.</p>
+
+                <div class="c-form" style="max-width: 800px; margin: 0 auto;">
+                    <h3 class="c-form__title" style="margin-bottom: 24px;">Registar Novo Evento</h3>
+                    <form id="event-form">
+                        <input type="hidden" id="event-id">
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div class="c-form__group">
+                                <label for="event-title" class="sr-only">Título do Evento</label>
+                                <input type="text" id="event-title" class="c-form__input" placeholder="Título do Evento *"
+                                    aria-label="Título do Evento" style="padding-left: 20px;" required>
+                            </div>
+
+                            <div class="c-form__group">
+                                <label for="event-date" class="sr-only">Data do Evento</label>
+                                <input type="date" id="event-date" class="c-form__input" aria-label="Data do Evento" style="padding-left: 20px;" required>
+                            </div>
+
+                            <div class="c-form__group">
+                                <label for="event-time" class="sr-only">Hora do Evento</label>
+                                <input type="time" id="event-time" class="c-form__input" aria-label="Hora do Evento" style="padding-left: 20px;" required>
+                            </div>
+
+                            <div class="c-form__group">
+                                <label for="event-location" class="sr-only">Localização do Evento</label>
+                                <select id="event-location" name="event-location" class="c-form__input" aria-label="Localização do Evento"
+                                    style="padding-left: 20px;" required>
+                                    <option value="" disabled selected>Selecione a Ilha/Local *</option>
+                                    <optgroup label="Grupo Ocidental">
+                                        <option value="Flores,PT">Ilha das Flores</option>
+                                        <option value="Corvo,PT">Ilha do Corvo</option>
+                                    </optgroup>
+                                    <optgroup label="Grupo Central">
+                                        <option value="Faial,PT">Ilha do Faial</option>
+                                        <option value="Pico,PT">Ilha do Pico</option>
+                                        <option value="Sao Jorge,PT">Ilha de São Jorge</option>
+                                        <option value="Terceira,PT">Ilha Terceira</option>
+                                        <option value="Graciosa,PT">Ilha da Graciosa</option>
+                                    </optgroup>
+                                    <optgroup label="Grupo Oriental">
+                                        <option value="Ponta Delgada,PT">Ilha de São Miguel</option>
+                                        <option value="Santa Maria,PT">Ilha de Santa Maria</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="c-form__group">
+                            <label for="event-description" class="sr-only">Descrição do evento</label>
+                            <textarea id="event-description" class="c-form__input c-form__textarea" rows="3" placeholder="Descrição detalhada do evento..."
+                                aria-label="Descrição do evento" style="padding-left: 20px;"></textarea>
+                        </div>
+
+                        <div class="form-actions"
+                            style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                            <button type="button" id="check-weather" class="btn btn--outline">Ver Clima</button>
+                            <button type="submit" id="btn-save-event" class="btn btn--primary">Guardar Evento</button>
+                        </div>
+                    </form>
+
+                    <div id="weather-display" class="weather-info-box" style="display: none;">
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--cinza-200); margin: 60px 0;">
+
+                <div class="events-list-header"
+                    style="display: flex; justify-content: center; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 1rem;">
+                    <h3 class="c-form__title" style="margin-bottom: 0;">Próximos Eventos</h3>
+                </div>
+
+                <div id="events-list" class="research">
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa-eventos" class="section">
+            <div class="container">
+                <h2 class="section__title">Mapa de Eventos</h2>
+                <div id="map"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <script type="module" src="src/eventos-app.js"></script>
+</body>
+
+</html>

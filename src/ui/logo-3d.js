@@ -34,7 +34,6 @@ export function initAnimacao3D() {
 
     function animate() {
         requestAnimationFrame(animate);
-        logoMesh.rotation.y += 0.005; 
         renderer.render(scene, camera);
     }
     animate();

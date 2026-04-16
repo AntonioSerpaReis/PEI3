@@ -6,19 +6,19 @@ import { initScrollToTop } from './ui/scroll-to-top.js';
 
 import { ChartController } from './controllers/ChartController.js';
 import { FormController } from './controllers/FormController.js';
-import { EventsController } from './controllers/EventsController.js';
+
 import { SubscriptionController } from './controllers/SubscriptionController.js';
 
 import { initDB } from './db/database.js';
 import { EventsRepository } from './db/EventsRepository.js';
 import { SubscriptionRepository } from './db/SubscriptionRepository.js';
+import { MapService } from './services/MapService.js';
 
 import { NewsService } from './services/NewsService.js';
 import { dadosOportunidades } from './data/config/chartData.js';
 
 /**
- * Event Listener principal. Inicializa todos os módulos e scripts
- * assim que o DOM estiver completamente carregado.
+ * Inicializador principal da aplicação.
  */
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -48,15 +48,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const dbInscricoes = new SubscriptionRepository(idb);
         new SubscriptionController(dbInscricoes);
 
-        const dbEventos = new EventsRepository(idb);
-        const gestor = new EventsController(dbEventos);
+        // Initialize map on homepage with event markers
+        const mapContainer = document.getElementById('map');
+        if (mapContainer) {
+            const mapService = new MapService('map');
+            const dbEventos = new EventsRepository(idb);
+            const events = await dbEventos.getAll();
+            mapService.updateMarkers(events);
+        }
 
-        window.addEventListener('deleteEvent', async (e) => {
-            if (confirm("Deseja remover este evento?")) {
-                await dbEventos.delete(e.detail);
-                gestor.renderEvents();
-            }
-        });
     } catch (e) {
         console.error("Failed to initialize database", e);
     }
