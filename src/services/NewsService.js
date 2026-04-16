@@ -25,7 +25,6 @@ export class NewsService {
                 this.container.innerHTML = '<p>Sem notícias recentes de momento.</p>';
             }
         } catch (error) {
-            console.error("Erro na News API:", error);
             this.container.innerHTML = '<p>Erro ao carregar o feed de notícias.</p>';
         }
     }
@@ -40,9 +39,10 @@ export class NewsService {
 
             const dateStr = new Date(article.publishedAt).toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
             
+            const safeTitle = escapeHTML(article.title || 'notícia');
             const imageHtml = article.urlToImage 
                 ? `<div class="news__image-wrapper">
-                       <img src="${article.urlToImage}" alt="Imagem de notícias" class="news__image" onerror="this.style.display='none'">
+                       <img src="${article.urlToImage}" alt="Imagem de notícias" class="news__image" loading="lazy" onerror="this.style.display='none'">
                    </div>`
                 : '';
 
@@ -55,14 +55,16 @@ export class NewsService {
                     <div class="news__content">
                         <span class="news__tag news__tag--noticia">Notícia</span>
                         <h3 class="news__title">
-                            ${escapeHTML(article.title)}
+                            ${safeTitle}
                         </h3>
                         <p class="news__excerpt">
                             ${escapeHTML(article.description || 'Clique no botão abaixo para ler os detalhes da notícia na íntegra.')}
                         </p>
                     </div>
                     <div style="margin-top: 24px;">
-                        <a href="${escapeHTML(article.url)}" target="_blank" rel="noopener" class="btn btn--primary" style="padding: 8px 16px; font-size: 0.8rem; border-radius: var(--radius-full);">
+                        <a href="${escapeHTML(article.url)}" target="_blank" rel="noopener" class="btn btn--primary"
+                           aria-label="Ler notícia: ${safeTitle}"
+                           style="padding: 8px 16px; font-size: 0.8rem; border-radius: var(--radius-full);">
                             Ler Notícia &rarr;
                         </a>
                     </div>

@@ -1,4 +1,3 @@
-import { initAnimacao3D } from './ui/logo-3d.js';
 import { initMenuNav } from './ui/menu-nav.js';
 import { initScrollToTop } from './ui/scroll-to-top.js';
 
@@ -12,7 +11,6 @@ import { EventsRepository } from './db/EventsRepository.js';
  */
 document.addEventListener('DOMContentLoaded', async () => {
 
-    initAnimacao3D();
     initMenuNav();
     initScrollToTop();
 
