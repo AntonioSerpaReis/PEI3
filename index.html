@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn-uicons.flaticon.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn-uicons.flaticon.com; img-src 'self' data: https: http:; connect-src 'self' https://api.openweathermap.org https://newsapi.org;">
-    content="Centro Académico Clínico dos Açores - Parceria entre a Universidade dos Açores e instituições de saúde
-    regionais.">
+    <meta name="description" content="Centro Académico Clínico dos Açores - Parceria entre a Universidade dos Açores e instituições de saúde regionais, dedicada à investigação clínica de excelência e telemedicina.">
     <meta name="keywords" content="CACA, saúde, Açores, investigação clínica, telemedicina, e-saúde, universidade">
     <title>CACA | Centro Académico Clínico dos Açores</title>
     <link rel="stylesheet" href="./css/style.css">
@@ -15,8 +12,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+
     <link rel='stylesheet'
         href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="preload" as="image" href="./assets/imagem.webp" type="image/webp" fetchpriority="high">
 </head>
 
 <body>
@@ -31,7 +30,7 @@
         <div class="header__container">
             <a href="#" class="header__logo" aria-label="Página inicial do CACA">
                 <div class="logo">
-                    <div id="logo-3d-container" class="logo-3d-container"></div>
+                    <img src="./assets/logo-caca.svg" alt="Logo CACA" class="header__logo-img" width="60" height="60">
                 </div>
             </a>
 
@@ -71,9 +70,18 @@
                 <div class="hero__gallery">
                     <div class="carousel" id="heroCarousel">
                         <div class="carousel-inner">
-                            <img src="./assets/imagem.jpg" alt="Paisagem dos Açores" class="carousel-item active">
-                            <img src="./assets/uac.png" alt="Universidade dos Açores" class="carousel-item">
-                            <img src="./assets/governo-acores.jpg" alt="Governo dos Açores" class="carousel-item">
+                            <picture>
+                                <source srcset="./assets/imagem.webp" type="image/webp">
+                                <img src="./assets/imagem.jpg" alt="Paisagem dos Açores" class="carousel-item active" fetchpriority="high" loading="eager" width="1050" height="590">
+                            </picture>
+                            <picture>
+                                <source srcset="./assets/uac.webp" type="image/webp">
+                                <img src="./assets/uac.png" alt="Universidade dos Açores" class="carousel-item" loading="lazy" width="1050" height="590">
+                            </picture>
+                            <picture>
+                                <source srcset="./assets/governo-acores.webp" type="image/webp">
+                                <img src="./assets/governo-acores.jpg" alt="Governo dos Açores" class="carousel-item" loading="lazy" width="1050" height="590">
+                            </picture>
                         </div>
                     </div>
                 </div>
@@ -456,7 +464,7 @@
     </main>
 
     <div class="site-footer-wrapper">
-        <div class="site-footer-bg" style="background-image: url('./assets/imagem.jpg');"></div>
+        <div class="site-footer-bg" style="background-image: url('./assets/imagem.webp');"></div>
         <div class="site-footer-overlay"></div>
 
         <section class="pre-footer-cta">
@@ -481,7 +489,7 @@
 
                     <div class="footer__nav">
                         <div class="footer__col">
-                            <h4 class="footer__title">O CACA</h4>
+                            <h3 class="footer__title">O CACA</h3>
                             <ul class="footer__links">
                                 <li><a href="#missao">Missão e Visão</a></li>
                                 <li><a href="#investigacao">Investigação</a></li>
@@ -491,7 +499,7 @@
                         </div>
 
                         <div class="footer__col">
-                            <h4 class="footer__title">Comunidade</h4>
+                            <h3 class="footer__title">Comunidade</h3>
                             <ul class="footer__links">
                                 <li><a href="#parceiros">Parceiros</a></li>
                                 <li><a href="#news-feed">Notícias</a></li>
@@ -501,7 +509,7 @@
                         </div>
 
                         <div class="footer__col">
-                            <h4 class="footer__title">Informação</h4>
+                            <h3 class="footer__title">Informação</h3>
                             <ul class="footer__links">
                                 <li><a href="#privacidade">Privacidade</a></li>
                                 <li><a href="#termos">Termos de Uso</a></li>
@@ -511,7 +519,7 @@
                         </div>
 
                         <div class="footer__col">
-                            <h4 class="footer__title">Redes Sociais</h4>
+                            <h3 class="footer__title">Redes Sociais</h3>
                             <ul class="footer__links">
                                 <li><a href="#twitter">Twitter</a></li>
                                 <li><a href="#linkedin">LinkedIn</a></li>

@@ -1,4 +1,3 @@
-import { initAnimacao3D } from './ui/logo-3d.js';
 import { initCarrossel } from './ui/carousel.js';
 import { initMenuNav } from './ui/menu-nav.js';
 import { initSaberMais } from './ui/saber-mais.js';
@@ -22,7 +21,6 @@ import { dadosOportunidades } from './data/config/chartData.js';
  */
 document.addEventListener('DOMContentLoaded', async () => {
 
-    initAnimacao3D();
     initCarrossel();
     initMenuNav();
     initSaberMais();
