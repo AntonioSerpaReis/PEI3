@@ -3,8 +3,8 @@ import { WeatherService } from '../services/WeatherService.js';
 import { MapService } from '../services/MapService.js';
 
 /**
- * Classe principal encarregue de orquestrar a vista da Gestão de Eventos,
- * comunicando com o Model IndexedDB e acionando Serviços de Mapa e Clima.
+ * Orquestração da vista da Gestão de Eventos,
+ * integrando IndexedDB com Serviços de Mapa e Clima.
  */
 export class EventsController {
     constructor(db) {
@@ -115,15 +115,19 @@ export class EventsController {
         const events = await this.db.getAll();
 
         list.innerHTML = events.map(ev => `
-            <article class="research-card card-blue">
-                <div class="card-header"><h3 class="card-title">${escapeHTML(ev.title)}</h3></div>
-                <p><strong>📅 ${escapeHTML(ev.date)} às ${escapeHTML(ev.time)}</strong></p>
-                <p>📍 ${escapeHTML(ev.location.split(',')[0])}</p>
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button onclick="window.editEvent(${ev.id})" class="btn-edit">
+            <article class="research__card" style="display: flex; flex-direction: column;">
+                <div class="research__content" style="flex-grow: 1;">
+                    <h3 class="research__card-title">${escapeHTML(ev.title)}</h3>
+                    <p class="research__card-text" style="margin-bottom: 15px;">
+                        <strong>📅 ${escapeHTML(ev.date)} às ${escapeHTML(ev.time)}</strong><br>
+                        📍 ${escapeHTML(ev.location.split(',')[0])}
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--cinza-200);">
+                    <button onclick="window.editEvent(${ev.id})" class="btn btn--outline" style="font-size: 0.85rem; padding: 8px 16px;">
                         Editar
                     </button>
-                    <button onclick="window.deleteEvent(${ev.id})" class="btn-delete">
+                    <button onclick="window.deleteEvent(${ev.id})" class="btn" style="background:#eef2f6; color:#e11d48; font-size: 0.85rem; padding: 8px 16px;">
                         Eliminar
                     </button>
                 </div>

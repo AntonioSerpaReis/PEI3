@@ -17,51 +17,55 @@ export class SubscriptionController {
         return regex.test(email);
     }
 
-    validarNome(nome) {
-        // Aceita letras (incluindo acentos) e espaços. Mínimo 3 caracteres.
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/;
-        return regex.test(nome.trim());
-    }
-
     async handleRegistration(e) {
         e.preventDefault();
 
         try {
-            const nomeInput = document.getElementById('news-name');
             const emailInput = document.getElementById('news-email');
+            const feedback = document.getElementById('newsletter-feedback');
 
-            if (!nomeInput || !emailInput) {
-                console.error("Erro: Alguns campos do formulário não foram encontrados no DOM.");
-                return;
-            }
-
-            if (!this.validarNome(nomeInput.value)) {
-                alert("Por favor, insira um nome válido (mínimo 3 caracteres, apenas letras).");
-                nomeInput.focus();
+            if (!emailInput) {
+                console.error("Erro: Campo de email não encontrado no DOM.");
                 return;
             }
 
             if (!this.validarEmail(emailInput.value)) {
-                alert("Por favor, insira um endereço de e-mail válido.");
+                if (feedback) {
+                    feedback.textContent = "Por favor, insira um endereço de e-mail válido.";
+                    feedback.className = "newsletter-new-disclaimer error";
+                } else {
+                    alert("Por favor, insira um endereço de e-mail válido.");
+                }
                 emailInput.focus();
                 return;
             }
 
             const inscricao = {
-                nome: nomeInput.value,
+                nome: 'Subscritor',
                 email: emailInput.value,
                 dataInscricao: new Date().toISOString()
             };
 
             await this.db.create(inscricao);
 
-            alert(`Obrigado, ${inscricao.nome}! Inscrição confirmada.`);
+            if (feedback) {
+                feedback.textContent = "Inscrição confirmada com sucesso! ✓";
+                feedback.className = "newsletter-new-disclaimer success";
+            } else {
+                alert(`Obrigado! Inscrição confirmada.`);
+            }
 
             e.target.reset();
 
         } catch (error) {
             console.error("Erro ao processar inscrição:", error);
-            alert("Ocorreu um erro ao guardar a sua inscrição.");
+            const feedback = document.getElementById('newsletter-feedback');
+            if (feedback) {
+                feedback.textContent = "Ocorreu um erro. Tente novamente.";
+                feedback.className = "newsletter-new-disclaimer error";
+            } else {
+                alert("Ocorreu um erro ao guardar a sua inscrição.");
+            }
         }
     }
 }

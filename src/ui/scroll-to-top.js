@@ -1,8 +1,5 @@
 /**
- * Adiciona a funcionalidade do botão de voltar ao topo da página.
- * O botão surge apenas quando o utilizador faz scroll para baixo e,
- * ao ser clicado, sobe suavemente a janela.
- * @returns {void}
+ * Botão de voltar ao topo com animação suave.
  */
 export function initScrollToTop() {
     const btnTopo = document.getElementById("btn-topo");
