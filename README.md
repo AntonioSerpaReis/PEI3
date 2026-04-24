@@ -17,7 +17,7 @@ O projeto encontra-se em produção e pode ser acedido através do seguinte link
 
 ---
 
-## Novas Funcionalidades e Interatividade (Entrega 2)
+## Novas Funcionalidades e Interatividade (Entrega 3)
 
 Nesta terceira fase do projeto, integrámos JavaScript para adicionar gestão de eventos, IndexedDB e uso de APIs (OpenWeather) assim como um mapa interativo para demonstrar a localização de eventos. O código foi totalmente refatorizado para uma arquitetura profissional sob a pasta `src/`, utilizando padrões modernos como Repositories e Controllers. A separação lógica garante clareza, modularidade e segue rigorosamente os princípios de Clean Code (SOLID).
 
